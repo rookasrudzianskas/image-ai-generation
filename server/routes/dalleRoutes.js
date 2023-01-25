@@ -23,15 +23,13 @@ router.route('/').post(async (req, res) => {
     const aiResponse = await openai.createImage({
       prompt,
       n: 1,
-      size: "512x512",
-      // response_format: 'b64_json',
+      size: "1024x1024",
+      response_format: 'b64_json',
     });
     // console.log("DONE")
-    // const image = aiResponse.data.data[0].b64_json;
-    console.log(res.data.data[0].url);
-    res.status(200).json({ photo: 'rokas' });
+    const image = aiResponse.data.data[0].b64_json;
+    res.status(200).json({ photo: image });
   } catch (error) {
-    console.error("THis drains me nuts:", error);
     res.status(500).send(error?.response.data.error.message || 'Something went wrong');
   }
 });

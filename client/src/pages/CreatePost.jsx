@@ -31,8 +31,7 @@ const CreatePost = ({}) => {
   }
 
   const generateImage = async () => {
-    if(form.prompt) {
-      console.log(form.prompt);
+    if (form.prompt) {
       try {
         setGeneratingImg(true);
         const response = await fetch("http://localhost:8080/api/v1/dalle", {
@@ -43,21 +42,19 @@ const CreatePost = ({}) => {
           body: JSON.stringify({
             prompt: form.prompt,
           }),
-        })
-        console.log(response);
+        });
+
         const data = await response.json();
-        console.log(data);
         setForm({ ...form, photo: `data:image/jpeg;base64,${data.photo}` });
-      } catch (error) {
-        console.log(error);
-        alert(error);
+      } catch (err) {
+        alert(err);
       } finally {
         setGeneratingImg(false);
       }
     } else {
-      alert('Please enter a prompt.');
+      alert('Please provide proper prompt');
     }
-  }
+  };
 
   return (
     <section className="max-w-7xl mx-auto">
@@ -89,10 +86,17 @@ const CreatePost = ({}) => {
           />
 
           <div className="relative bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-64 p-3 h-64 flex justify-center items-center">
-            {form.photo ? (
-              <img src={form.photo} alt={form.prompt} className="w-full h-full object-contain"/>
+            { form.photo ? (
+              <img
+                src={form.photo}
+                alt={form.prompt}
+                className="w-full h-full object-contain"
+              />
             ) : (
-              <img src={preview} alt="preview" className="w-9/12 h-9/12 object-contain opacity-40"
+              <img
+                src={preview}
+                alt="preview"
+                className="w-9/12 h-9/12 object-contain opacity-40"
               />
             )}
 
