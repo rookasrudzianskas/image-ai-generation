@@ -22,6 +22,10 @@ const Home = ({}) => {
   const [searchTimeout, setSearchTimeout] = useState(null);
   const [searchedResults, setSearchedResults] = useState(null);
 
+  const handleSearchChange = (e) => {
+
+  }
+
   return (
     <section className="max-w-7xl mx-auto">
       <div>
@@ -30,7 +34,14 @@ const Home = ({}) => {
       </div>
 
       <div className="mt-16">
-        <FormField />
+        <FormField
+          labelName="Search posts"
+          type="text"
+          name="text"
+          placeholder="Search something..."
+          value={searchText}
+          handleChange={handleSearchChange}
+        />
       </div>
 
       <div className="mt-10">
