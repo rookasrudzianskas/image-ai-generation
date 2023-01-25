@@ -35,7 +35,7 @@ const CreatePost = ({}) => {
       console.log(form.prompt);
       try {
         setGeneratingImg(true);
-        const response = await fetch(`http://localhost:8080/api/v1/dalle`, {
+        const response = await fetch("http://localhost:8080/api/v1/dalle", {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -44,8 +44,9 @@ const CreatePost = ({}) => {
             prompt: form.prompt,
           }),
         })
-
+        console.log(response);
         const data = await response.json();
+        console.log(data);
         setForm({ ...form, photo: `data:image/jpeg;base64,${data.photo}` });
       } catch (error) {
         console.log(error);
